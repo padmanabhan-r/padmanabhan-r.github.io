@@ -3,103 +3,626 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Padmanabhan Rajendrakumar</title>
+  <title>Padmanabhan Rajendrakumar | AI Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    body {
+    :root {
+      --bg-color: #050510;
+      --card-bg: rgba(15, 15, 35, 0.6);
+      --accent: #7c3aed;
+      --accent-light: #9f7aea;
+      --text-primary: #f0f0f0;
+      --text-secondary: #a0aec0;
+      --border-glow: rgba(124, 58, 237, 0.3);
+      --grid-line: rgba(255, 255, 255, 0.05);
+    }
+    
+    * {
       margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0c0c0c;
-      color: #f5f5f5;
-      line-height: 1.6;
-      padding: 2rem;
+      padding: 0;
+      box-sizing: border-box;
     }
-    h1, h2 {
-      color: #ffcc00;
+    
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      position: relative;
     }
-    a {
-      color: #66b2ff;
-      text-decoration: none;
+    
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 30px 30px;
+      z-index: -2;
     }
-    header {
-      text-align: center;
-      margin-bottom: 3rem;
+    
+    .gradient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.15), transparent 70%),
+                 radial-gradient(circle at 10% 80%, rgba(56, 189, 248, 0.1), transparent 50%);
+      z-index: -1;
     }
+    
     .container {
-      max-width: 900px;
-      margin: auto;
-      background: #1a1a1a;
+      max-width: 1100px;
+      margin: 0 auto;
       padding: 2rem;
+    }
+    
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .profile-intro {
+      position: relative;
+      z-index: 2;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--accent-light);
+      font-weight: 500;
+    }
+    
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .title {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    
+    .tagline {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      color: var(--text-secondary);
+    }
+    
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 
+                  0 0 0 1px rgba(255, 255, 255, 0.05),
+                  0 0 20px var(--border-glow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), 
+                  0 0 0 1px rgba(255, 255, 255, 0.05),
+                  0 0 30px var(--border-glow);
+    }
+    
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .skill-category {
+      background: rgba(255, 255, 255, 0.03);
       border-radius: 12px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      transition: all 0.3s ease;
     }
-    .tech-icons img {
-      width: 40px;
-      margin: 0.5rem;
-      vertical-align: middle;
+    
+    .skill-category:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-3px);
     }
+    
+    .skill-category h3 {
+      font-size: 1.1rem;
+      color: var(--accent-light);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .skill-category h3 i {
+      margin-right: 8px;
+    }
+    
+    .skill-category ul {
+      list-style: none;
+      padding-left: 1.5rem;
+    }
+    
+    .skill-category li {
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+    
+    .skill-category li::before {
+      content: '▹';
+      position: absolute;
+      left: -1rem;
+      color: var(--accent);
+    }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .project-card {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      height: 100%;
+    }
+    
+    .project-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-5px);
+    }
+    
+    .project-card h3 {
+      font-size: 1.3rem;
+      color: var(--accent-light);
+      margin-bottom: 0.8rem;
+    }
+    
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .tech-tag {
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--accent-light);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-family: 'Fira Code', monospace;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .social-links a {
+      color: var(--text-secondary);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(to right, var(--accent), var(--accent-light));
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 500;
+      text-decoration: none;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(124, 58, 237, 0.3);
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5);
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    
+    .highlight {
+      color: var(--accent);
+    }
+    
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+    
+    .tech-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .tech-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .tech-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 0.5rem;
+      filter: grayscale(20%);
+      transition: all 0.3s ease;
+    }
+    
+    .tech-item:hover .tech-icon {
+      filter: grayscale(0%);
+    }
+    
+    .tech-name {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-family: 'Fira Code', monospace;
+    }
+    
     footer {
       text-align: center;
-      margin-top: 4rem;
+      padding: 3rem 0;
+      color: var(--text-secondary);
+      background: rgba(0, 0, 0, 0.2);
+      margin-top: 5rem;
+    }
+    
+    .footer-text {
+      max-width: 500px;
+      margin: 0 auto;
       font-size: 0.9rem;
-      color: #777;
+    }
+    
+    .animated-gradient {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, rgba(124, 58, 237, 0.2), rgba(56, 189, 248, 0.1));
+      filter: blur(90px);
+      animation: float 15s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translate(-10%, -10%);
+      }
+      100% {
+        transform: translate(10%, 10%);
+      }
+    }
+    
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+      }
+      40% {
+        transform: translateY(-20px) translateX(-50%);
+      }
+      60% {
+        transform: translateY(-10px) translateX(-50%);
+      }
+    }
+    
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.8s forwards;
+    }
+    
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    .delay-4 { animation-delay: 0.8s; }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .skills-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .card {
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="grid-bg"></div>
+  <div class="gradient-bg"></div>
+  
   <header>
-    <h1>👋 Hi, I'm Padmanabhan Rajendrakumar</h1>
-    <p>Technical Project Manager - AI/ML at <strong>Ford Motor Company</strong></p>
+    <div class="animated-gradient"></div>
+    <div class="profile-intro">
+      <h1 class="fade-in">Padmanabhan Rajendrakumar</h1>
+      <p class="title fade-in delay-1">AI Engineer & Technical PM @ Ford Motor Company</p>
+      <p class="tagline fade-in delay-2">Experimentalist | Builder | Curious Mind</p>
+      <div class="social-links fade-in delay-3">
+        <a href="https://github.com/padmanabhan-r" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/padmanabhan-rajendrakumar/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="mailto:contact@padmanabhan.io" title="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+      <a href="#about" class="cta-button fade-in delay-4">Explore My Work</a>
+    </div>
+    <div class="scroll-indicator">
+      <i class="fas fa-chevron-down"></i>
+    </div>
   </header>
-
+  
   <div class="container">
-    <section>
-      <h2>🚀 About Me</h2>
+    <section id="about" class="card">
+      <h2 class="section-title">About Me</h2>
       <p>
-        I build <strong>business-driven AI and Generative AI solutions</strong> with a focus on real-world impact.
-        Currently leading product-centric AI/ML efforts at <strong>Ford</strong>, managing cross-functional teams to deliver scalable applications and intelligent automation tools.
+        I'm an <span class="highlight">AI Engineer and Technical Product Manager</span> passionate about exploring the intersections of artificial intelligence, data systems, and emerging technologies. At Ford Motor Company, I lead initiatives that transform complex data into actionable insights and intelligent systems.
       </p>
       <p>
-        With over a <strong>decade of experience</strong> spanning engineering, analytics, and leadership, I bring a unique mix of hands-on technical expertise and strategic program delivery.
+        With a background in both engineering and product management, I bridge the gap between technical possibilities and business needs, turning AI experiments into production-ready solutions that drive real-world impact.
       </p>
       <p>
-        I hold a <strong>Master’s in Computing Science</strong> from <em>Simon Fraser University</em> and a <strong>B.Tech in Computer Science</strong> from <em>Sri Venkateswara College of Engineering</em>.
+        My work spans from developing machine learning pipelines and generative AI applications to creating interactive data visualizations and exploring the convergence of blockchain and artificial intelligence.
       </p>
     </section>
-
-    <section>
-      <h2>💼 Highlights</h2>
-      <ul>
-        <li>⚙️ GenAI & ML solutions delivery at Ford</li>
-        <li>📊 Experience across time series modeling, synthetic data, and dashboards</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>🛠️ Skills & Tech Stack</h2>
-      <div class="tech-icons">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" alt="Jupyter" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React.js" />
-        <img src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/qlik.svg" alt="Qlik" />
-        <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" />
+    
+    <section id="expertise" class="card">
+      <h2 class="section-title">Core Expertise</h2>
+      <div class="skills-container">
+        <div class="skill-category">
+          <h3><i class="fas fa-brain"></i> AI & Machine Learning</h3>
+          <ul>
+            <li>Generative AI Applications</li>
+            <li>Machine Learning Pipelines</li>
+            <li>Natural Language Processing</li>
+            <li>Computer Vision Systems</li>
+          </ul>
+        </div>
+        
+        <div class="skill-category">
+          <h3><i class="fas fa-database"></i> Data Engineering</h3>
+          <ul>
+            <li>Big Data Processing</li>
+            <li>Data Pipeline Architecture</li>
+            <li>ETL Workflows</li>
+            <li>Database Optimization</li>
+          </ul>
+        </div>
+        
+        <div class="skill-category">
+          <h3><i class="fas fa-tasks"></i> Product Management</h3>
+          <ul>
+            <li>Technical Roadmapping</li>
+            <li>Requirements Analysis</li>
+            <li>Agile Methodologies</li>
+            <li>Stakeholder Management</li>
+          </ul>
+        </div>
+        
+        <div class="skill-category">
+          <h3><i class="fas fa-chart-line"></i> Data Visualization</h3>
+          <ul>
+            <li>Interactive Dashboards</li>
+            <li>Business Intelligence</li>
+            <li>Custom Analytics UIs</li>
+            <li>Data Storytelling</li>
+          </ul>
+        </div>
       </div>
     </section>
-
-    <section>
-      <h2>📫 Get in Touch</h2>
-      <p>
-        <a href="https://github.com/padmanabhan-r" target="_blank">GitHub</a> |
-        <a href="https://www.linkedin.com/in/padmanabhan-rajendrakumar/" target="_blank">LinkedIn</a>
-      </p>
+    
+    <section id="tech-stack" class="card">
+      <h2 class="section-title">Tech Stack</h2>
+      <div class="tech-stack">
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="tech-icon" />
+          <span class="tech-name">Python</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" alt="Jupyter" class="tech-icon" />
+          <span class="tech-name">Jupyter</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP" class="tech-icon" />
+          <span class="tech-name">GCP</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="tech-icon" />
+          <span class="tech-name">Docker</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="tech-icon" />
+          <span class="tech-name">Kubernetes</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" class="tech-icon" />
+          <span class="tech-name">Terraform</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="tech-icon" />
+          <span class="tech-name">React</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/qlik.svg" alt="Qlik" class="tech-icon" />
+          <span class="tech-name">Qlik</span>
+        </div>
+        <div class="tech-item">
+          <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" class="tech-icon" />
+          <span class="tech-name">Hugging Face</span>
+        </div>
+      </div>
+    </section>
+    
+    <section id="projects" class="card">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>GenAI Dashboard</h3>
+          <p>Interactive dashboard for monitoring and analyzing generative AI model performance across multiple parameters and training runs.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Plotly</span>
+            <span class="tech-tag">HuggingFace</span>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <h3>ML Pipeline Orchestrator</h3>
+          <p>Scalable system for orchestrating end-to-end machine learning workflows from data ingestion to model deployment.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Kubernetes</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">TensorFlow</span>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <h3>Blockchain x AI Integration</h3>
+          <p>Experimental platform exploring the integration of AI models with blockchain for verifiable computation and decentralized governance.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Solidity</span>
+            <span class="tech-tag">PyTorch</span>
+            <span class="tech-tag">Web3.py</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="contact" class="card">
+      <h2 class="section-title">Let's Connect</h2>
+      <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out through any of the platforms below.</p>
+      <div class="social-links">
+        <a href="https://github.com/padmanabhan-r" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/padmanabhan-rajendrakumar/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      </div>
     </section>
   </div>
-
+  
   <footer>
-    &copy; 2025 Padmanabhan Rajendrakumar · Built with ❤️ and HTML
+    <div class="footer-text">
+      &copy; 2025 Padmanabhan Rajendrakumar — Built with curiosity and passion for intelligent systems
+    </div>
   </footer>
+
+  <script>
+    // Simple scroll animation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Fade in elements as they come into view
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.opacity = 0;
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      observer.observe(card);
+    });
+  </script>
 </body>
 </html>
